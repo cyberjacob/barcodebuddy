@@ -11,6 +11,8 @@ jobs:
 #      with:
 #        args: . --report=json --standard=.github/workflows/phpcs_ruleset.xml
     - uses: MilesChou/php-tools-action/phpmd@master
+      with:
+        args: . text cleancode,codesize,design,naming,unusedcode
     - uses: MilesChou/php-tools-action/phpmetrics@master
     - uses: MilesChou/php-tools-action/phpstan@master
       with:
