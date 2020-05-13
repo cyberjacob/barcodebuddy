@@ -18,6 +18,7 @@
 
 
 require_once __DIR__ . "/configProcessing.inc.php";
+require_once __DIR__ . "/db.inc.php";
 
 const API_O_PRODUCTS     = 'objects/products';
 const API_PRODUCTS       = 'stock/products';
@@ -83,12 +84,17 @@ class CurlGenerator
     /**
      * Create a new CURL request
      *
-     * @param string $url URL to call
-     * @param method $method HTTP Request Method
-     * @param string Request Body Data to be sent as JSON
-     * 
+     * @param string       $url           URL to call
+     * @param method       $method        HTTP Request Method
+     * @param string       $jsonData      Request Body Data to be sent as JSON
+     * @param null | array $loginOverride Array with `LOGIN_API_KEY` and `LOGIN_URL`
+                                           specifying the Grocy API key and URL respectively
+     * @param true | false $noApiCall     If true, $url is a full URL, otherwise it is treated as relative to the Grocy API root
+     *
+     * @return void
      */
-    function __construct($url, $method = METHOD_GET, $jasonData = null, $loginOverride = null, $noApiCall = false) {
+    function __construct($url, $method = METHOD_GET, $jasonData = null, $loginOverride = null, $noApiCall = false)
+    {
         global $CONFIG;
         
         $this->_method  = $method;
@@ -96,7 +102,6 @@ class CurlGenerator
         $this->_ch      = curl_init();
 
         if ($loginOverride == null) {
-            require_once __DIR__ . "/db.inc.php";
             global $BBCONFIG;
             $apiKey = $BBCONFIG["GROCY_API_KEY"];
             $apiUrl = $BBCONFIG["GROCY_API_URL"];
@@ -114,15 +119,16 @@ class CurlGenerator
             curl_setopt($this->_ch, CURLOPT_POSTFIELDS, $jasonData);
         }
         
-        if ($noApiCall)
+        if ($noApiCall) {
             curl_setopt($this->_ch, CURLOPT_URL, $url);
-        else
+        } else {
             curl_setopt($this->_ch, CURLOPT_URL, $apiUrl . $url);
+        }
         curl_setopt($this->_ch, CURLOPT_HTTPHEADER, $headerArray);
         curl_setopt($this->_ch, CURLOPT_CUSTOMREQUEST, $this->_method);
         curl_setopt($this->_ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->_ch, CURLOPT_CONNECTTIMEOUT, 0);
-        curl_setopt($this->_ch, CURLOPT_USERAGENT,'BarcodeBuddy v' . BB_VERSION_READABLE);
+        curl_setopt($this->_ch, CURLOPT_USERAGENT, 'BarcodeBuddy v' . BB_VERSION_READABLE);
         curl_setopt($this->_ch, CURLOPT_TIMEOUT, $CONFIG->CURL_TIMEOUT_S);
         if ($CONFIG->CURL_ALLOW_INSECURE_SSL_CA) {
             curl_setopt($this->_ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -134,20 +140,26 @@ class CurlGenerator
     
     /**
      * Execute the request and return the results
+     * 
+     * @param true | false $decode If true, API response will be treated as JSON and decoded before being returned
+     *
+     * @return string | array API call response
      */
-    function execute($decode = false) {
+    function execute($decode = false)
+    {
         if (DISPLAY_DEBUG) {
             global $db;
             $startTime = microtime(true);
             $db->saveLog("<i>Executing API call: " . $this->urlApi. "</i>", false, false, true);
         }
-        $curlResult   = curl_exec($this->_ch);
-        $this->checkForErrorsAndThrow($curlResult);
+        $curlResult = curl_exec($this->_ch);
+        $this->_checkForErrorsAndThrow($curlResult);
         curl_close($this->_ch);
 
         $jsonDecoded = json_decode($curlResult, true);
-        if ($decode && isset($jsonDecoded->response->status) && $jsonDecoded->response->status == 'ERROR') 
+        if ($decode && isset($jsonDecoded->response->status) && $jsonDecoded->response->status == 'ERROR') {
             throw new InvalidJsonResponseException($jsonDecoded->response->errormessage);
+        }
         
         if (isset($jsonDecoded["error_message"])) {
             $isIgnoredError = false;
@@ -155,52 +167,77 @@ class CurlGenerator
                 if (preg_match($ignoredError, $jsonDecoded["error_message"]))
                     $isIgnoredError = true;
             }
-            if (!$isIgnoredError)
+            if (!$isIgnoredError) {
                 throw new InvalidJsonResponseException($jsonDecoded["error_message"]);
+            }
         }
         if (DISPLAY_DEBUG) {
             $totalTimeMs = round((microtime(true)- $startTime) * 1000);
             $db->saveLog("<i>Executing took " . $totalTimeMs . "ms</i>", false, false, true);
         }
-        if ($decode)
+        if ($decode) {
             return $jsonDecoded;
-         else
+        } else {
             return $curlResult;
+        }
     }
 
-    private function checkForErrorsAndThrow($curlResult) {
+    /**
+     * Check for errors encountered while making an API call
+     *
+     * @param mixed $curlResult Result of CURL execution
+     *
+     * @return void
+     */
+    private function _checkForErrorsAndThrow($curlResult)
+    {
         $curlError    = curl_errno($this->_ch);
         $responseCode = curl_getinfo($this->_ch, CURLINFO_RESPONSE_CODE);
 
-        if ($responseCode == 401)
+        if ($responseCode == 401) {
             throw new UnauthorizedException();
+        }
         if ($curlResult === false) {
-            if (self::isErrorSslRelated($curlError))
+            if (self::_isErrorSslRelated($curlError)) {
                 throw new InvalidSSLException();
-            else
+            } else {
                 throw new InvalidServerResponseException();
+            }
         } elseif ($curlResult == "" && $responseCode != 204) {
                 throw new InvalidServerResponseException();
         }
     }
 
-    private static function isErrorSslRelated($curlError) {
-        return ($curlError == CURLE_SSL_CERTPROBLEM || $curlError == CURLE_SSL_CIPHER || $curlError == CURLE_SSL_CACERT);
+    /**
+     * Detects if a CURL error is related to SSL
+     *
+     * @param int $curlError CURL error number
+     *
+     * @return true | false If error is related to SSL
+     */
+    private static function _isErrorSslRelated($curlError)
+    {
+        return ($curlError == CURLE_SSL_CERTPROBLEM
+                || $curlError == CURLE_SSL_CIPHER
+                || $curlError == CURLE_SSL_CACERT
+               );
     }
 }
 
 /**
  * API Class
  */
-class API {
+class API
+{
     /**
      * Getting info about one or all Grocy products.
      * 
-     * @param  string ProductId or none, to get a list of all products
+     * @param  string $ProductId or none, to get a list of all products
+     * 
      * @return array Product info or array of products
      */
-    public static function getProductInfo($productId = "") {
-
+    public static function getProductInfo($productId = "")
+    {
         if ($productId == "") {
             $apiurl = API_O_PRODUCTS;
         } else {
@@ -238,14 +275,17 @@ class API {
     /**
      * Open product with $id
      * 
-     * @param  String productId
+     * @param  String $id
+     *
      * @return none
      */
-    public static function openProduct($id) {
-
-        $data      = json_encode(array(
-            'amount' => "1"
-        ));
+    public static function openProduct($id)
+    {
+        $data = json_encode(
+            array(
+                'amount' => "1"
+            )
+        );
         $apiurl = API_STOCK . "/" . $id . "/open";
 
         $curl = new CurlGenerator($apiurl, METHOD_POST, $data);
@@ -256,16 +296,16 @@ class API {
         }
     }
     
-    
-
     /**
      *   Check if API details are correct
      * 
-     * @param  String URL to Grocy API
-     * @param  String API key
+     * @param  String $givenurl URL to Grocy API
+     * @param  String $apikey   API key
+     *
      * @return Returns String with error or true if connection could be established
      */
-    public static function checkApiConnection($givenurl, $apikey) {
+    public static function checkApiConnection($givenurl, $apikey)
+    {
         $loginInfo = array(LOGIN_URL => $givenurl, LOGIN_API_KEY => $apikey);
 
         $curl = new CurlGenerator(API_SYTEM_INFO, METHOD_GET, null, $loginInfo);
@@ -278,13 +318,16 @@ class API {
         } catch (UnauthorizedException $e) {
             return "Invalid API key<br>";
         } catch (InvalidSSLException $e) {
-            return "Invalid SSL certificate!<br>If you are using a self-signed certificate, you can disable the check in config.php<br>";
+            return"Invalid SSL certificate!<br>".
+                "If you are using a self-signed certificate, you can disable the check in config.php<br>";
         }
         if (isset($result["grocy_version"]["Version"])) {
             $version = $result["grocy_version"]["Version"];
             
             if (!API::isSupportedGrocyVersion($version)) {
-                return "Grocy " . MIN_GROCY_VERSION . " or newer required. You are running " . $version . ", please upgrade your Grocy instance.<br>";
+                return "Grocy ".MIN_GROCY_VERSION.
+                    " or newer required. You are running ".$version.
+                    ", please upgrade your Grocy instance.<br>";
             } else {
                 return true;
             }
@@ -293,13 +336,14 @@ class API {
     }
     
     /**
-     *
      * Check if the installed Grocy version is equal or newer to the required version
      * 
-     * @param  String reported Grocy version
+     * @param  String $version reported Grocy version
+     *
      * @return boolean true if version supported
      */
-    public static function isSupportedGrocyVersion($version) {
+    public static function isSupportedGrocyVersion($version)
+    {
         if (!preg_match("/\d+.\d+.\d+/", $version)) {
             return false;
         }
@@ -311,7 +355,9 @@ class API {
             return false;
         } else if ($version_ex[0] == $minVersion_ex[0] && $version_ex[1] < $minVersion_ex[1]) {
             return false;
-        } else if ($version_ex[0] == $minVersion_ex[0] && $version_ex[1] == $minVersion_ex[1] && $version_ex[2] < $minVersion_ex[2]) {
+        } else if ($version_ex[0] == $minVersion_ex[0]
+                   && $version_ex[1] == $minVersion_ex[1]
+                   && $version_ex[2] < $minVersion_ex[2]) {
             return false;
         } else {
             return true;
@@ -320,12 +366,12 @@ class API {
     
     
     /**
-     *
      * Requests the version of the Grocy instance
      * 
      * @return String Reported Grocy version
      */
-    public static function getGrocyVersion() {
+    public static function getGrocyVersion()
+    {
 
         $curl = new CurlGenerator(API_SYTEM_INFO);
         try {
@@ -346,14 +392,23 @@ class API {
      *
      *  Adds a Grocy product.
      * 
-     * @param  String id of product
-     * @param  int amount of product
-     * @param  String Date of best before Default: null (requests default BestBefore date from grocy)
-     * @param  String price of product Default: null
+     * @param String $id                id of product
+     * @param int    $amount            amount of product
+     * @param String $bestbefore        Date of best before Default: null (requests default BestBefore date from grocy)
+     * @param String $price             price of product Default: null
+     * @param ?      &$fileLock         Lock to remove once transaction is complete
+     * @param ?      $defaultBestBefore Override defaul;t best-before date
+     *
      * @return false if default best before date not set
      */
-    public static function purchaseProduct($id, $amount, $bestbefore = null, $price = null, &$fileLock = null, $defaultBestBefore = null) {
-        require_once __DIR__ . "/db.inc.php";
+    public static function purchaseProduct($id,
+                                           $amount,
+                                           $bestbefore = null,
+                                           $price = null,
+                                           &$fileLock = null,
+                                           $defaultBestBefore = null
+                                          )
+    {
         global $BBCONFIG;
         
         $daysBestBefore = 0;
@@ -367,14 +422,16 @@ class API {
         }
         if ($bestbefore != null) {
             $daysBestBefore           = $bestbefore;
-            $data['best_before_date'] = self::formatBestBeforeDays($bestbefore);
+            $data['best_before_date'] = self::_formatBestBeforeDays($bestbefore);
         } else {
-            if ($defaultBestBefore != null)
+            if ($defaultBestBefore != null) {
                 $daysBestBefore       = $defaultBestBefore;
-            else
-                $daysBestBefore       = self::getDefaultBestBeforeDays($id);
-            $data['best_before_date'] = self::formatBestBeforeDays($daysBestBefore);
+            } else{
+                $daysBestBefore       = self::_getDefaultBestBeforeDays($id);
+            }
+            $data['best_before_date'] = self::_formatBestBeforeDays($daysBestBefore);
         }
+        
         $data_json = json_encode($data);
         $apiurl = API_STOCK . "/" . $id . "/add";
 
@@ -384,29 +441,31 @@ class API {
         } catch (Exception $e) {
             self::processError($e, "Could not add product to inventory");
         }
-        if ($fileLock != null)
+        if ($fileLock != null) {
             $fileLock->removeLock();
+        }
         if ($BBCONFIG["SHOPPINGLIST_REMOVE"]) {
             self::removeFromShoppinglist($id, $amount);
         }
         return ($daysBestBefore != 0);
     }
     
-    
-    
     /**
-     *
      * Removes an item from the default shoppinglist
      * 
-     * @param  String product id
-     * @param  Int amount
+     * @param  String $productid product id
+     * @param  Int    $amount    amount
+     *
      * @return none
      */
-    public static function removeFromShoppinglist($productid, $amount) {
-        $data      = json_encode(array(
-            'product_id' => $productid,
-            'product_amount' => $amount
-        ));
+    public static function removeFromShoppinglist($productid, $amount)
+    {
+        $data = json_encode(
+            array(
+                'product_id' => $productid,
+                'product_amount' => $amount
+            )
+        );
         $apiurl = API_SHOPPINGLIST . "remove-product";
 
         $curl = new CurlGenerator($apiurl, METHOD_POST, $data);
@@ -419,18 +478,21 @@ class API {
     
  
     /**
-     *
      * Adds an item to the default shoppinglist
      * 
-     * @param  String product id
-     * @param  Int amount
+     * @param  String $productid product id
+     * @param  Int    $amount    amount
+     *
      * @return none
      */
-    public static function addToShoppinglist($productid, $amount) {
-        $data      = json_encode(array(
-            'product_id' => $productid,
-            'product_amount' => $amount
-        ));
+    public static function addToShoppinglist($productid, $amount)
+    {
+        $data = json_encode(
+            array(
+                'product_id' => $productid,
+                'product_amount' => $amount
+            )
+        );
         $apiurl = API_SHOPPINGLIST . "add-product";
 
         $curl = new CurlGenerator($apiurl, METHOD_POST, $data);
@@ -442,23 +504,24 @@ class API {
     }
     
     
-    
-    
    /**
     * Consumes a product
     * 
-    * @param  int id
-    * @param  int amount
-    * @param  boolean set true if product was spoiled. Default: false 
+    * @param  int     $id     id
+    * @param  int     $amount amount
+    * @param  boolean $spoiled set true if product was spoiled. Default: false 
+    *
     * @return none
     */
-    public static function consumeProduct($id, $amount, $spoiled = false) {
-
-        $data      = json_encode(array(
-            'amount' => $amount,
-            'transaction_type' => 'consume',
-            'spoiled' => $spoiled
-        ));
+    public static function consumeProduct($id, $amount, $spoiled = false)
+    {
+        $data = json_encode(
+            array(
+                'amount' => $amount,
+                'transaction_type' => 'consume',
+                'spoiled' => $spoiled
+            )
+        );
         
         $apiurl = API_STOCK . "/" . $id . "/consume";
 
@@ -473,14 +536,19 @@ class API {
     /**
      * Sets barcode to a Grocy product (replaces all old ones,
      *  so make sure to request them first)
-     * @param int product id
-     * @param String barcode(s) to set
+     *
+     * @param int    $id product id
+     * @param String $barcode barcode(s) to set
+     *
+     * @return void
      */
-    public static function setBarcode($id, $barcode) {
-
-        $data      = json_encode(array(
-            'barcode' => $barcode
-        ));
+    public static function setBarcode($id, $barcode)
+    {
+        $data = json_encode(
+            array(
+                'barcode' => $barcode
+            )
+        );
 
         $apiurl    = API_O_PRODUCTS . "/" . $id;
 
@@ -493,13 +561,15 @@ class API {
     }
     
     
-    
     /**
      * Formats the amount of days into future date
-     * @param  [int] $days  Amount of days a product is consumable, or -1 if it does not expire
-     * @return [String]     Formatted date
+     *
+     * @param int $days Amount of days a product is consumable, or -1 if it does not expire
+     *
+     * @return String Formatted date
      */
-    private static function formatBestBeforeDays($days) {
+    private static function _formatBestBeforeDays($days)
+    {
         if ($days == "-1") {
             return "2999-12-31";
         } else {
@@ -510,10 +580,13 @@ class API {
     
     /**
      * Retrieves the default best before date for a product
-     * @param  [int] $id Product id
-     * @return [int]     Amount of days or -1 if it does not expire
+     *
+     * @param int $id Product id
+     *
+     * @return int Amount of days or -1 if it does not expire
      */
-    private static function getDefaultBestBeforeDays($id) {
+    private static function _getDefaultBestBeforeDays($id)
+    {
         $info = self::getProductInfo($id);
         $days = $info["default_best_before_days"];
         checkIfNumeric($days);
@@ -523,10 +596,13 @@ class API {
     
     /**
      * Look up a barcode using openfoodfacts
-     * @param  [String] $barcode Input barcode
-     * @return [String]          Returns product name or "N/A" if not found
+     *
+     * @param String $barcode Input barcode
+     *
+     * @return String Returns product name or "N/A" if not found
      */
-    public static function lookupNameByBarcodeInOpenFoodFacts($barcode) {
+    public static function lookupNameByBarcodeInOpenFoodFacts($barcode)
+    {
         global $BBCONFIG;
         
         $url = "https://world.openfoodfacts.org/api/v0/product/" . $barcode . ".json";
@@ -577,14 +653,14 @@ class API {
     
     /**
      * Get a Grocy product by barcode
-     * @param  [String] $barcode barcode to lookup
-     * @return [Array]           Array if product info or null if barcode
-     *                           is not associated with a product
+     *
+     * @param String $barcode barcode to lookup
+     *
+     * @return Array Array if product info, or null if barcode is not associated with a product
      */
-    public static function getProductByBardcode($barcode) {
-        
+    public static function getProductByBardcode($barcode)
+    {
         $apiurl = API_STOCK . "/by-barcode/" . $barcode;
-
 
         $curl = new CurlGenerator($apiurl);
         try {
@@ -613,17 +689,15 @@ class API {
         }
     }
 
-
-
     /**
      * Gets location and amount of stock of a product
-     * @param  [String] $productid  Product id
-     * @return [Array]              Array with location info, null if none in stock
+     * @param String $productid  Product id
+     *
+     * @return Array Array with location info, null if none in stock
      */
-    public static function getProductLocations($productid) {
-        
+    public static function getProductLocations($productid)
+    {
         $apiurl = API_STOCK . "/" . $productid . "/locations";
-
 
         $curl = new CurlGenerator($apiurl);
         try {
@@ -634,16 +708,15 @@ class API {
         return $result;
     }
     
-    
-    
-    
     /**
      * Getting info of a Grocy chore
-     * @param  string $choreId  Chore ID. If not passed, all chores are looked up
-     * @return [array]          Either chore if ID, or all chores
+     *
+     * @param string $choreId  Chore ID. If not passed, all chores are looked up
+     *
+     * @return array Either chore if ID, or all chores
      */
-    public static function getChoresInfo($choreId = "") {
-        
+    public static function getChoresInfo($choreId = "")
+    {
         if ($choreId == "") {
             $apiurl = API_CHORES;
         } else {
@@ -659,19 +732,20 @@ class API {
         return $result;
     }
     
-    
     /**
      * Executes a Grocy chore
-     * @param  [int] $choreId Chore id
+     *
+     * @param int $choreId Chore id
      */
-    public static function executeChore($choreId) {
-        
+    public static function executeChore($choreId)
+    {
         $apiurl    = API_CHORE_EXECUTE . $choreId . "/execute";
-        $data      = json_encode(array(
-            'tracked_time' => "",
-            'done_by' => ""
-        ));
-
+        $data      = json_encode(
+            array(
+                'tracked_time' => "",
+                'done_by' => ""
+            )
+        );
 
         $curl = new CurlGenerator($apiurl, METHOD_POST, $data);
         try {
@@ -681,6 +755,14 @@ class API {
         }
     }
 
+    /**
+     * Handle errors incurred while making API calls to Grocy
+     *
+     * @param exception $e            Exception that occurred
+     * @param string    $errorMessage Error from Grocy
+     *
+     * @return string
+     */
     public static function processError($e, $errorMessage) {
         $class = get_class($e);
         switch($class) {
@@ -699,10 +781,19 @@ class API {
         }
     }
 
+    /**
+     * Log an error to the database
+     *
+     * @param string $errorMessage Error Message to record
+     * @param bool   $isFatal      If the error was/is fatal
+     *
+     * @returns void
+     */
     public static function logError($errorMessage, $isFatal = true) {
         require_once __DIR__ . "/db.inc.php";
         global $db;
-        if ($db != null)
+        if ($db != null) {
             $db->saveError($errorMessage, $isFatal);
+        }
     }   
 }
