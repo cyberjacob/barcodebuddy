@@ -10,6 +10,12 @@ jobs:
 #      uses: MilesChou/php-tools-action/phpcs@master
 #      with:
 #        args: . --report=json --standard=.github/workflows/phpcs_ruleset.xml
+
+    - name: PHPCS check
+      uses: chekalsky/phpcs-action@v1
+      with:
+        installed_paths: '${{ github.workspace }}/.github/workflows'
+
     - uses: MilesChou/php-tools-action/phpmetrics@master
       with:
         args: . --exclude=incl/authentication/composer/vendor,incl/websocket/php-websocket,incl/websocket/php-websocket-1.0,incl/sse/websocket_client.php
