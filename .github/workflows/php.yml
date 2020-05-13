@@ -6,19 +6,25 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      
     - name: Setup PHP
       uses: shivammathur/setup-php@v1
       with:
         php-version: 7.3
         coverage: none # disable xdebug, pcov
+
     - name: Install CheckStyle to Github Annotations Converter
-      run: composer require staabm/annotate-pull-request-from-checkstyle # install cs2pr
-      
-    - run: composer require "squizlabs/php_codesniffer=*" # install php_codesniffer
-      name: Install PHP CodeSniffer
+      run: composer require staabm/annotate-pull-request-from-checkstyle
+
+# Temporaraly disabled because phpcs has no functionality to skip existing issues
+#    - run: composer require "squizlabs/php_codesniffer=*"
+#      name: Install PHP CodeSniffer
         
 #    - run: vendor/bin/phpcs --report=checkstyle --standard=.github/workflows/phpcs_ruleset.xml . | vendor/bin/cs2pr
 #      name: PHP CodeSniffer
+
+    - run: composer require phpstan/phpstan
+      name: Install PHPStan
       
     - run: vendor/bin/phpstan analyse --error-format=checkstyle . | vendor/bin/cs2pr
       name: PHPStan
