@@ -1,0 +1,15 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: phpcs
+      uses: MilesChou/php-tools-action/phpcs@master
+    - uses: MilesChou/php-tools-action/phpmd@master
+    - uses: MilesChou/php-tools-action/phpmetrics@master
+    - uses: MilesChou/php-tools-action/phpstan@master
+      with:
+        args: --level=0
