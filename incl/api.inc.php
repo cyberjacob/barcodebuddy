@@ -86,10 +86,11 @@ class CurlGenerator
      *
      * @param string       $url           URL to call
      * @param method       $method        HTTP Request Method
-     * @param string       $jsonData      Request Body Data to be sent as JSON
+     * @param string       $jasonData     Request Body Data to be sent as JSON
      * @param null | array $loginOverride Array with `LOGIN_API_KEY` and `LOGIN_URL`
-                                           specifying the Grocy API key and URL respectively
-     * @param true | false $noApiCall     If true, $url is a full URL, otherwise it is treated as relative to the Grocy API root
+                                    specifying the Grocy API key and URL respectively
+     * @param true | false $noApiCall     If true, $url is a full URL, otherwise it is treated as relative
+                                    to the Grocy API root
      *
      * @return void
      */
@@ -164,8 +165,9 @@ class CurlGenerator
         if (isset($jsonDecoded["error_message"])) {
             $isIgnoredError = false;
             foreach (self::IGNORED_API_ERRORS_REGEX as $ignoredError) {
-                if (preg_match($ignoredError, $jsonDecoded["error_message"]))
+                if (preg_match($ignoredError, $jsonDecoded["error_message"])) {
                     $isIgnoredError = true;
+                }
             }
             if (!$isIgnoredError) {
                 throw new InvalidJsonResponseException($jsonDecoded["error_message"]);
@@ -232,7 +234,7 @@ class API
     /**
      * Getting info about one or all Grocy products.
      * 
-     * @param  string $ProductId or none, to get a list of all products
+     * @param string $productId or none, to get a list of all products
      * 
      * @return array Product info or array of products
      */
@@ -275,7 +277,7 @@ class API
     /**
      * Open product with $id
      * 
-     * @param  String $id
+     * @param String $id Product ID
      *
      * @return none
      */
@@ -299,8 +301,8 @@ class API
     /**
      *   Check if API details are correct
      * 
-     * @param  String $givenurl URL to Grocy API
-     * @param  String $apikey   API key
+     * @param String $givenurl URL to Grocy API
+     * @param String $apikey   API key
      *
      * @return Returns String with error or true if connection could be established
      */
@@ -338,7 +340,7 @@ class API
     /**
      * Check if the installed Grocy version is equal or newer to the required version
      * 
-     * @param  String $version reported Grocy version
+     * @param String $version reported Grocy version
      *
      * @return boolean true if version supported
      */
@@ -356,8 +358,9 @@ class API
         } else if ($version_ex[0] == $minVersion_ex[0] && $version_ex[1] < $minVersion_ex[1]) {
             return false;
         } else if ($version_ex[0] == $minVersion_ex[0]
-                   && $version_ex[1] == $minVersion_ex[1]
-                   && $version_ex[2] < $minVersion_ex[2]) {
+            && $version_ex[1] == $minVersion_ex[1]
+            && $version_ex[2] < $minVersion_ex[2]
+        ) {
             return false;
         } else {
             return true;
@@ -389,26 +392,25 @@ class API
     
     
     /**
-     *
      *  Adds a Grocy product.
      * 
      * @param String $id                id of product
      * @param int    $amount            amount of product
      * @param String $bestbefore        Date of best before Default: null (requests default BestBefore date from grocy)
      * @param String $price             price of product Default: null
-     * @param ?      &$fileLock         Lock to remove once transaction is complete
+     * @param ?      $fileLock          Lock to remove once transaction is complete
      * @param ?      $defaultBestBefore Override defaul;t best-before date
      *
      * @return false if default best before date not set
      */
-    public static function purchaseProduct($id,
-                                           $amount,
-                                           $bestbefore = null,
-                                           $price = null,
-                                           &$fileLock = null,
-                                           $defaultBestBefore = null
-                                          )
-    {
+    public static function purchaseProduct(
+        $id,
+        $amount,
+        $bestbefore = null,
+        $price = null,
+        &$fileLock = null,
+        $defaultBestBefore = null
+    ) {
         global $BBCONFIG;
         
         $daysBestBefore = 0;
@@ -426,7 +428,7 @@ class API
         } else {
             if ($defaultBestBefore != null) {
                 $daysBestBefore       = $defaultBestBefore;
-            } else{
+            } else {
                 $daysBestBefore       = self::_getDefaultBestBeforeDays($id);
             }
             $data['best_before_date'] = self::_formatBestBeforeDays($daysBestBefore);
@@ -453,8 +455,8 @@ class API
     /**
      * Removes an item from the default shoppinglist
      * 
-     * @param  String $productid product id
-     * @param  Int    $amount    amount
+     * @param String $productid product id
+     * @param Int    $amount    amount
      *
      * @return none
      */
@@ -480,8 +482,8 @@ class API
     /**
      * Adds an item to the default shoppinglist
      * 
-     * @param  String $productid product id
-     * @param  Int    $amount    amount
+     * @param String $productid product id
+     * @param Int    $amount    amount
      *
      * @return none
      */
@@ -507,9 +509,9 @@ class API
    /**
     * Consumes a product
     * 
-    * @param  int     $id     id
-    * @param  int     $amount amount
-    * @param  boolean $spoiled set true if product was spoiled. Default: false 
+    * @param int     $id      id
+    * @param int     $amount  amount
+    * @param boolean $spoiled set true if product was spoiled. Default: false 
     *
     * @return none
     */
@@ -637,15 +639,19 @@ class API
         }
 
         if ($BBCONFIG["USE_GENERIC_NAME"]) {
-            if ($genericName != null)
+            if ($genericName != null) {
                 return $genericName;
-            if ($productName != null)
+            }
+            if ($productName != null) {
                 return $productName;
+            }
         } else {
-            if ($productName != null)
+            if ($productName != null) {
                 return $productName;
-            if ($genericName != null)
+            }
+            if ($genericName != null) {
                 return $genericName;
+            }
         }
         return "N/A";
     }
@@ -691,7 +697,8 @@ class API
 
     /**
      * Gets location and amount of stock of a product
-     * @param String $productid  Product id
+     *
+     * @param String $productid Product id
      *
      * @return Array Array with location info, null if none in stock
      */
@@ -711,7 +718,7 @@ class API
     /**
      * Getting info of a Grocy chore
      *
-     * @param string $choreId  Chore ID. If not passed, all chores are looked up
+     * @param string $choreId Chore ID. If not passed, all chores are looked up
      *
      * @return array Either chore if ID, or all chores
      */
@@ -736,6 +743,8 @@ class API
      * Executes a Grocy chore
      *
      * @param int $choreId Chore id
+     *
+     * @return void
      */
     public static function executeChore($choreId)
     {
@@ -763,7 +772,8 @@ class API
      *
      * @return string
      */
-    public static function processError($e, $errorMessage) {
+    public static function processError($e, $errorMessage)
+    {
         $class = get_class($e);
         switch($class) {
             case 'InvalidServerResponseException':
@@ -787,7 +797,7 @@ class API
      * @param string $errorMessage Error Message to record
      * @param bool   $isFatal      If the error was/is fatal
      *
-     * @returns void
+     * @return void
      */
     public static function logError($errorMessage, $isFatal = true) {
         require_once __DIR__ . "/db.inc.php";
