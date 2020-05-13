@@ -1,0 +1,2041 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Constant MENU_ERROR not found\\.$#"
+			count: 1
+			path: ../../error.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../error.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../error.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../error.php
+
+		-
+			message: "#^Undefined variable\\: \\$ERROR_MESSAGE$#"
+			count: 1
+			path: ../../error.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../error.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../error.php
+
+		-
+			message: "#^Function createSqlFile not found\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Instantiated class Delight\\\\Db\\\\PdoDsn not found\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Instantiated class Delight\\\\Auth\\\\Auth not found\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Function isUserSetUp not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Access to constant ADMIN on an unknown class Delight\\\\Auth\\\\Role\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Function createSqlFile not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Function getInitialSetupSql not found\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Function changeUserName not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Function getInitialSetupSql not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/authentication/authentication.inc.php
+
+		-
+			message: "#^Function checkExtensionsInstalled not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^PHPDoc tag @return has invalid value \\(\\[array\\] Returns an array for all modules\\. \\$return\\[\"result\"\\] is\nRESULT_ALL_INSTALLED, RESULT_OPT_MISSING or RESULT_REQ_MISSING\\)\\: Unexpected token \"\\]\", expected '\\(' at offset 91$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Constant RESULT_ALL_INSTALLED not found\\.$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Constant REQ_EXTENSIONS not found\\.$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Constant RESULT_REQ_MISSING not found\\.$#"
+			count: 2
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Constant OPTIONAL_EXTENSIONS not found\\.$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Constant RESULT_OPT_MISSING not found\\.$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Function isExtensionInstalled not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Function isGrocyApiSet not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/internalChecking.inc.php
+
+		-
+			message: "#^Function processNewBarcode not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant STATE_CONSUME not found\\.$#"
+			count: 7
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant EVENT_TYPE_MODE_CHANGE not found\\.$#"
+			count: 8
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function outputLog not found\\.$#"
+			count: 27
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant STATE_CONSUME_SPOILED not found\\.$#"
+			count: 4
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant STATE_CONSUME_ALL not found\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant STATE_PURCHASE not found\\.$#"
+			count: 5
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant STATE_OPEN not found\\.$#"
+			count: 4
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant STATE_GETSTOCK not found\\.$#"
+			count: 4
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant STATE_ADD_SL not found\\.$#"
+			count: 4
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function stringStartsWith not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function checkIfNumeric not found\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function changeQuantityAfterScan not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant EVENT_TYPE_ERROR not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant WS_RESULT_PRODUCT_UNKNOWN not found\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processChoreBarcode not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant EVENT_TYPE_EXEC_CHORE not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function sanitizeString not found\\.$#"
+			count: 5
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Instantiated class LockGenerator not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to method createLock\\(\\) on an unknown class LockGenerator\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method getProductByBardcode\\(\\) on an unknown class API\\.$#"
+			count: 4
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processUnknownBarcode not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processKnownBarcode not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function outputLog not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function sendWebsocketMessage not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function pluginEventReceiver_processEvent not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processChoreBarcode not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method executeChore\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method getChoresInfo\\(\\) on an unknown class API\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processUnknownBarcode not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant EVENT_TYPE_ADD_NEW_BARCODE not found\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant WS_RESULT_PRODUCT_LOOKED_UP not found\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method lookupNameByBarcodeInOpenFoodFacts\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant EVENT_TYPE_ADD_UNKNOWN_BARCODE not found\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function stateToString not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function getProductByIdFromVariable not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function changeWeightTareItem not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant EVENT_TYPE_ACTION_REQUIRED not found\\.$#"
+			count: 3
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method consumeProduct\\(\\) on an unknown class API\\.$#"
+			count: 4
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method purchaseProduct\\(\\) on an unknown class API\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processModeChangeGetParameter not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processRefreshedBarcode not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function processKnownBarcode not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant WS_RESULT_PRODUCT_FOUND not found\\.$#"
+			count: 9
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function getQuantitiyForBarcode not found\\.$#"
+			count: 2
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant EVENT_TYPE_ADD_KNOWN_BARCODE not found\\.$#"
+			count: 10
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method openProduct\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Constant USE_NEW_INVENTORY_API not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method getProductLocations\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method addToShoppinglist\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function getQuantitiyForBarcode not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function printSelections not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function sanitizeString not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function checkIfNumeric not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function explodeWordsAndMakeCheckboxes not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function cleanNameForTagLookup not found\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function cleanNameForTagLookup not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function changeQuantityAfterScan not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function getAllTags not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Call to static method getProductInfo\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Parameter \\#2 \\$cmp_function of function usort expects callable\\(mixed, mixed\\)\\: int, 'sortTags' given\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function sortTags not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function sortChores not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function getAllChores not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Offset 'id' does not exist on array\\('barcode' \\=\\> null\\)\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Parameter \\#2 \\$cmp_function of function usort expects callable\\(mixed, mixed\\)\\: int, 'sortChores' given\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function stringStartsWith not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function strrtrim not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function generateRandomString not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function getApiUrl not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function showErrorNotWritable not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/processing.inc.php
+
+		-
+			message: "#^Function initStream not found\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function connectToWebsocket not found\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function sendStillAlive not found\\.$#"
+			count: 2
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function requestCurrentState not found\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function readData not found\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function connectToWebsocket not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function websocket_open not found\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Undefined variable\\: \\$errorstr$#"
+			count: 3
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function sendData not found\\.$#"
+			count: 4
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function sendStillAlive not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function readData not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Constant MAX_EXECUTION_TIME_S not found\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function websocket_read not found\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Undefined variable\\: \\$errstr$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function sendData not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function initStream not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, int given\\.$#"
+			count: 4
+			path: ../../incl/sse/sse_data.php
+
+		-
+			message: "#^Function sendWSResult not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Function getClient not found\\.$#"
+			count: 3
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Function requestSavedState not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Function sendNewState not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Function stateToString not found\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Function getClient not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Function isNewServerSupported not found\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Instantiated class Bloatless\\\\WebSocket\\\\Client not found\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Instantiated class WebsocketClient not found\\.$#"
+			count: 1
+			path: ../../incl/websocket/client_internal.php
+
+		-
+			message: "#^Function sendWebsocketMessage not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Function sendWSResult not found\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Function requestCurrentState not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Function requestSavedState not found\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Function sendWebsocketStateChange not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Function sendNewState not found\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Function isNewServerSupported not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Binary operation \"\\*\" between string and 100 results in an error\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Binary operation \"\\*\" between string and 10000 results in an error\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Binary operation \"\\+\" between \\(array\\|float\\|int\\) and string results in an error\\.$#"
+			count: 1
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Variable \\$version might not be defined\\.$#"
+			count: 3
+			path: ../../incl/websocketconnection.inc.php
+
+		-
+			message: "#^Constant BB_VERSION not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function processNewBarcode not found\\.$#"
+			count: 4
+			path: ../../index.php
+
+		-
+			message: "#^Function sanitizeString not found\\.$#"
+			count: 8
+			path: ../../index.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Constant RESULT_REQ_MISSING not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function checkExtensionsInstalled not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function isGrocyApiSet not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function processModeChangeGetParameter not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function hideGetPostParameters not found\\.$#"
+			count: 4
+			path: ../../index.php
+
+		-
+			message: "#^Function processRefreshedBarcode not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function processButtons not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Undefined variable\\: \\$db$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to static method getProductInfo\\(\\) on an unknown class API\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlMainMenuTableKnown not found\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlMainMenuTableUnknown not found\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlLogTextArea not found\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlMainMenuReqActions not found\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Constant MENU_MAIN not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to method setText\\(\\) on an unknown class MenuItemLink\\.$#"
+			count: 4
+			path: ../../index.php
+
+		-
+			message: "#^Instantiated class MenuItemLink not found\\.$#"
+			count: 4
+			path: ../../index.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 4
+			path: ../../index.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function processButtons not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function checkIfNumeric not found\\.$#"
+			count: 6
+			path: ../../index.php
+
+		-
+			message: "#^Function changeWeightTareItem not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to static method setBarcode\\(\\) on an unknown class API\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Constant EVENT_TYPE_ASSOCIATE_PRODUCT not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function outputLog not found\\.$#"
+			count: 3
+			path: ../../index.php
+
+		-
+			message: "#^Call to static method consumeProduct\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Constant EVENT_TYPE_ADD_KNOWN_BARCODE not found\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Call to static method purchaseProduct\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlMainMenuReqActions not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 4
+			path: ../../index.php
+
+		-
+			message: "#^Instantiated class TableGenerator not found\\.$#"
+			count: 3
+			path: ../../index.php
+
+		-
+			message: "#^Call to static method getProductByBardcode\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to method startRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 3
+			path: ../../index.php
+
+		-
+			message: "#^Call to method addCell\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 20
+			path: ../../index.php
+
+		-
+			message: "#^Call to method buildEditField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 10
+			path: ../../index.php
+
+		-
+			message: "#^Call to method endRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 3
+			path: ../../index.php
+
+		-
+			message: "#^Call to method addTableClass\\(\\) on an unknown class UiEditor\\.$#"
+			count: 3
+			path: ../../index.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 7
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlMainMenuTableKnown not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 6
+			path: ../../index.php
+
+		-
+			message: "#^Function printSelections not found\\.$#"
+			count: 2
+			path: ../../index.php
+
+		-
+			message: "#^Function explodeWordsAndMakeCheckboxes not found\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlMainMenuTableUnknown not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function getHtmlLogTextArea not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../index.php
+
+		-
+			message: "#^Function createUser not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function login not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Constant MENU_LOGIN not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function isUserSetUp not found\\.$#"
+			count: 2
+			path: ../../login.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 2
+			path: ../../login.php
+
+		-
+			message: "#^Function getHtmlLogin not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function getHtmlCreateUser not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function login not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Caught class Delight\\\\Auth\\\\UnknownUsernameException not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Caught class Delight\\\\Auth\\\\InvalidPasswordException not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Caught class Delight\\\\Auth\\\\TooManyRequestsException not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function createUser not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function changeUserName not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function sanitizeString not found\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Access to constant ADMIN on an unknown class Delight\\\\Auth\\\\Role\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Function getHtmlCreateUser not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 2
+			path: ../../login.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 4
+			path: ../../login.php
+
+		-
+			message: "#^Call to method addLineBreak\\(\\) on an unknown class UiEditor\\.$#"
+			count: 9
+			path: ../../login.php
+
+		-
+			message: "#^Call to method buildEditField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 5
+			path: ../../login.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 3
+			path: ../../login.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../login.php
+
+		-
+			message: "#^Function getHtmlLogin not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../login.php
+
+		-
+			message: "#^Undefined variable\\: \\$auth$#"
+			count: 1
+			path: ../../logout.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 2
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Constant MENU_GENERIC not found\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Function getHtmlAdminMenu not found\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Function getHtmlAdminMenu not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 3
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/admin.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Undefined variable\\: \\$db$#"
+			count: 4
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Function hideGetPostParameters not found\\.$#"
+			count: 4
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Function checkIfNumeric not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Constant MENU_GENERIC not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method setId\\(\\) on an unknown class MenuItemLink\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Instantiated class MenuItemLink not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 2
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Function getApiTable not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Function getMobileAppPage not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Function getMobileAppPage not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Function getApiUrl not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 2
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 7
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addLineBreak\\(\\) on an unknown class UiEditor\\.$#"
+			count: 7
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addDiv\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method buildEditField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 5
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addScript\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Function getApiTable not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Instantiated class TableGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method startRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addCell\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 4
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method endRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Call to method addTableClass\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/apimanagement.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Function checkIfNumeric not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Function sanitizeString not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Undefined variable\\: \\$db$#"
+			count: 2
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Constant MENU_GENERIC not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Function getHtmlChoreTable not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Function getHtmlChoreTable not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Function getAllChores not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Instantiated class TableGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method startRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method addCell\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 3
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method buildEditField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method endRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Call to method addTableClass\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/chores.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Function checkIfNumeric not found\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Undefined variable\\: \\$db$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Constant MENU_GENERIC not found\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Function printSettingsQuantityTable not found\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Function printSettingsQuantityTable not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Instantiated class TableGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method startRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method addCell\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 4
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method endRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Call to method addTableClass\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/quantities.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function saveSettings not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Constant MENU_SETTINGS not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 3
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function getHtmlSettingsGeneral not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function getHtmlSettingsGrocyApi not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function getHtmlSettingsWebsockets not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function saveSettings not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function sanitizeString not found\\.$#"
+			count: 2
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function stringStartsWith not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function getHtmlSettingsGeneral not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 2
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 4
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addDiv\\(\\) on an unknown class UiEditor\\.$#"
+			count: 9
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method buildEditField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 11
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addLineBreak\\(\\) on an unknown class UiEditor\\.$#"
+			count: 3
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addCheckbox\\(\\) on an unknown class UiEditor\\.$#"
+			count: 7
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method addHiddenField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function getHtmlSettingsGrocyApi not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function checkGrocyConnection not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function checkGrocyConnection not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Call to static method checkApiConnection\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function getHtmlSettingsWebsockets not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Function websocket_open not found\\.$#"
+			count: 1
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Undefined variable\\: \\$errorstr$#"
+			count: 2
+			path: ../../menu/settings.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Function checkIfNumeric not found\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Undefined variable\\: \\$db$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Constant MENU_GENERIC not found\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Function getHtmlTagTable not found\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Function getHtmlTagTable not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Function getAllTags not found\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Instantiated class TableGenerator not found\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method startRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method addCell\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 3
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method endRow\\(\\) on an unknown class TableGenerator\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Call to method addTableClass\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../menu/tags.php
+
+		-
+			message: "#^Function pluginEventReceiver_processEvent not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../plugins/EventReceiver.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../screen.php
+
+		-
+			message: "#^Undefined variable\\: \\$BBCONFIG$#"
+			count: 2
+			path: ../../screen.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Undefined variable\\: \\$BBCONFIG$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Call to static method checkApiConnection\\(\\) on an unknown class API\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Function sanitizeString not found\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Undefined variable\\: \\$db$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Constant MENU_SETUP not found\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Instantiated class WebUiGenerator not found\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method addHeader\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Constant RESULT_REQ_MISSING not found\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Function checkExtensionsInstalled not found\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method addCard\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Function getHtmlSetupExtMissing not found\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Function getHtmlSetupTable not found\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method addFooter\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method printHtml\\(\\) on an unknown class WebUiGenerator\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Function getHtmlSetupTable not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Instantiated class UiEditor not found\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method addHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 5
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method addLineBreak\\(\\) on an unknown class UiEditor\\.$#"
+			count: 5
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method buildEditField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method buildButton\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method getHtml\\(\\) on an unknown class UiEditor\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Function getHtmlSetupExtMissing not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Function formatExtentioncolor not found\\.$#"
+			count: 2
+			path: ../../setup.php
+
+		-
+			message: "#^Call to method addHiddenField\\(\\) on an unknown class UiEditor\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Function formatExtentioncolor not found while trying to analyse it \\- autoloading is probably not configured properly\\.$#"
+			count: 1
+			path: ../../setup.php
+
+		-
+			message: "#^Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\)\\: void, array\\(\\$this\\(Composer\\\\Autoload\\\\ClassLoader\\), 'loadClass'\\) given\\.$#"
+			count: 1
+			path: ../../vendor/composer/ClassLoader.php
+
+		-
+			message: "#^Method Composer\\\\Autoload\\\\ClassLoader\\:\\:loadClass\\(\\) should return bool\\|null but return statement is missing\\.$#"
+			count: 1
+			path: ../../vendor/composer/ClassLoader.php
+
+		-
+			message: "#^Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\)\\: void, array\\('ComposerAutoloaderInitca88cc9a49856e8a8620887d2951a310', 'loadClassLoader'\\) given\\.$#"
+			count: 1
+			path: ../../vendor/composer/autoload_real.php
+
+		-
+			message: "#^Anonymous function has an unused use \\$loader\\.$#"
+			count: 1
+			path: ../../vendor/composer/autoload_static.php
+
+		-
+			message: "#^Constant RESULT_ALL_INSTALLED not found\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Function checkExtensionsInstalled not found\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Function isNewServerSupported not found\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^If condition is always false\\.$#"
+			count: 3
+			path: ../../wsserver.php
+
+		-
+			message: "#^Instantiated class Bloatless\\\\WebSocket\\\\Server not found\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Undefined variable\\: \\$CONFIG$#"
+			count: 2
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setMaxClients\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setCheckOrigin\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setMaxConnectionsPerIp\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setMaxRequestsPerMinute\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method registerApplication\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Server\\.$#"
+			count: 2
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to static method getInstance\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Application\\\\ScreenApplication\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to static method getInstance\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Application\\\\StatusApplication\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method run\\(\\) on an unknown class Bloatless\\\\WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Instantiated class SplClassLoader not found\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method register\\(\\) on an unknown class SplClassLoader\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Instantiated class WebSocket\\\\Server not found\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setMaxClients\\(\\) on an unknown class WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setCheckOrigin\\(\\) on an unknown class WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setMaxConnectionsPerIp\\(\\) on an unknown class WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method setMaxRequestsPerMinute\\(\\) on an unknown class WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method registerApplication\\(\\) on an unknown class WebSocket\\\\Server\\.$#"
+			count: 2
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to static method getInstance\\(\\) on an unknown class WebSocket\\\\Application\\\\DemoApplication\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to static method getInstance\\(\\) on an unknown class WebSocket\\\\Application\\\\StatusApplication\\.$#"
+			count: 1
+			path: ../../wsserver.php
+
+		-
+			message: "#^Call to method run\\(\\) on an unknown class WebSocket\\\\Server\\.$#"
+			count: 1
+			path: ../../wsserver.php

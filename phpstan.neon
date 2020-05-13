@@ -1,9 +1,0 @@
-parameters:
-	level: 5
-	paths:
-		- .
-	excludes_analyse:
-		- incl/authentication/composer/vendor
-		- incl/websocket/php-websocket
-		- incl/websocket/php-websocket-1.0
-		- incl/sse/websocket_client.php
