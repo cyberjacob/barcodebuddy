@@ -21,23 +21,6 @@ require_once __DIR__ . "/../incl/configProcessing.inc.php";
 require_once __DIR__ . "/../incl/db.inc.php";
 require_once __DIR__ . "/../incl/processing.inc.php";
 
-//removes Get paramterss
-$requestedUrl = strtok($_SERVER["REQUEST_URI"], '?');
-
-//removes everything before "/api"
-$requestedUrl = trim(substr($requestedUrl, strpos($requestedUrl, '/api')));
-
-$api = new BBuddyApi();
-if ($requestedUrl == "/api/") {
-    readfile(__DIR__ . "/doc.html");
-    die();
-}
-if ($CONFIG->REQUIRE_API_KEY) {
-    $api->checkIfAuthorized();
-}
-$api->execute($requestedUrl);
-
-
 /**
  * API Base Class
  */
@@ -333,3 +316,19 @@ class ApiRoute
         BBuddyApi::sendResult($result, $result["result"]["http_code"]);
     }
 }
+
+//removes Get paramterss
+$requestedUrl = strtok($_SERVER["REQUEST_URI"], '?');
+
+//removes everything before "/api"
+$requestedUrl = trim(substr($requestedUrl, strpos($requestedUrl, '/api')));
+
+$api = new BBuddyApi();
+if ($requestedUrl == "/api/") {
+    readfile(__DIR__ . "/doc.html");
+    die();
+}
+if ($CONFIG->REQUIRE_API_KEY) {
+    $api->checkIfAuthorized();
+}
+$api->execute($requestedUrl);
