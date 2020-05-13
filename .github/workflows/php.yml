@@ -9,7 +9,7 @@ jobs:
     - name: phpcs
       uses: MilesChou/php-tools-action/phpcs@master
       with:
-        args: . --report=json --standard=.github/workflows/phpcs_ruleset.xml
+        args: --report=json --standard=.github/workflows/phpcs_ruleset.xml
     - uses: MilesChou/php-tools-action/phpmd@master
     - uses: MilesChou/php-tools-action/phpmetrics@master
     - uses: MilesChou/php-tools-action/phpstan@master
