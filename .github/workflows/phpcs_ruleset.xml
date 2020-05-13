@@ -4,9 +4,9 @@
   <file>.</file>
   
   <!-- Exclude dependencies -->
-  <exclude-pattern type="relative">^/incl/authentication/composer/vendor/*</exclude>
-  <exclude-pattern type="relative">^/incl/websocket/php-websocket/*</exclude>
-  <exclude-pattern type="relative">^/incl/websocket/php-websocket-1.0/*</exclude>
+  <exclude-pattern type="relative">^/incl/authentication/composer/vendor/*</exclude-pattern>
+  <exclude-pattern type="relative">^/incl/websocket/php-websocket/*</exclude-pattern>
+  <exclude-pattern type="relative">^/incl/websocket/php-websocket-1.0/*</exclude-pattern>
   
   <!-- Enable output colours -->
   <arg name="colors"/>
