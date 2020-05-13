@@ -6,20 +6,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-#    - name: phpcs
-#      uses: MilesChou/php-tools-action/phpcs@master
-#      with:
-#        args: . --report=json --standard=.github/workflows/phpcs_ruleset.xml
-
-    - name: PHPCS check
-      uses: chekalsky/phpcs-action@v1
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
       with:
-        args: . --report=json --standard=.github/workflows/phpcs_ruleset.xml
-
-    - uses: MilesChou/php-tools-action/phpmetrics@master
-      with:
-        args: . --exclude=incl/authentication/composer/vendor,incl/websocket/php-websocket,incl/websocket/php-websocket-1.0,incl/sse/websocket_client.php
-    - uses: MilesChou/php-tools-action/phpstan@master
-      with:
-        args: analyse .
-
+        php-version: 7.3
+        coverage: none # disable xdebug, pcov
+    - run: composer require staabm/annotate-pull-request-from-checkstyle # install cs2pr
+    - run: vendor/bin/phpcs --report=checkstyle --standard=.github/workflows/phpcs_ruleset.xml . | vendor/bin/cs2pr
+    - run: vendor/bin/phpstan analyse --error-format=checkstyle . | vendor/bin/cs2pr
