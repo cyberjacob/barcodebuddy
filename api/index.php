@@ -49,6 +49,7 @@ class BBuddyApi
      * Check if API call has the correct authorization.
      * Either from a user authentication, disabled authentication (either globally or for a specific subnet),
      * or from an API key.
+     *
      * @return true | false
      */
     function checkIfAuthorized()
@@ -81,6 +82,7 @@ class BBuddyApi
     
     /**
      * Return an unauthorized result and stop.
+     *
      * @return void
      */
     static function sendUnauthorizedAndDie()
@@ -91,8 +93,10 @@ class BBuddyApi
     
     /**
      * Complete an API request
+     *
+     * @param string $url URL path to execute
+     *
      * @return void
-     * @param string url URL path to execute
      */
     function execute($url)
     {
@@ -112,6 +116,7 @@ class BBuddyApi
     
     /**
      * Create a new API instance
+     *
      * @return void
      */
     function __construct()
@@ -121,10 +126,12 @@ class BBuddyApi
     
     /**
      * Create object for storing API call results
+     *
      * @return array
-     * @param mixed data API Result
-     * @param string result Success/Fail Description
-     * @param int http_int Result Code intended to be returned
+     *
+     * @param mixed $data API Result
+     * @param string $result Success/Fail Description
+     * @param int $http_int Result Code intended to be returned
      */
     static function createResultArray($data = null, $result = "OK", $http_int = 200)
     {
@@ -139,6 +146,7 @@ class BBuddyApi
     
     /**
      * Helper function for creating new API routes
+     *
      * @return void
      */
     private function _addRoute($route)
@@ -148,6 +156,7 @@ class BBuddyApi
     
     /**
      * Create all standard routes
+     *
      * @return void
      */
     private function _initRoutes()
@@ -194,8 +203,7 @@ class BBuddyApi
         $this->_addRoute(
             new ApiRoute(
                 "/state/getmode",
-                function ()
-                {
+                function () {
                     global $db;
                     return self::createResultArray(
                         array(
@@ -209,15 +217,15 @@ class BBuddyApi
         $this->_addRoute(
             new ApiRoute(
                 "/state/setmode",
-                function ()
-                {
+                function () {
                     global $db;
-                    //Also check if value is a valid range (STATE_CONSUME the lowest and STATE_CONSUME_ALL the highest value)
-                    if (
-                        !isset($_POST["state"]) ||
-                        !is_numeric($_POST["state"]) ||
-                        $_POST["state"] < STATE_CONSUME ||
-                        $_POST["state"] > STATE_CONSUME_ALL
+                    //Also check if value is a valid range:
+                    //    STATE_CONSUME the lowest and
+                    //    STATE_CONSUME_ALL the highest value
+                    if (   !isset($_POST["state"])
+                        || !is_numeric($_POST["state"])
+                        || $_POST["state"] < STATE_CONSUME
+                        || $_POST["state"] > STATE_CONSUME_ALL
                     ) {
                         return self::createResultArray(null, "Invalid state provided", 400);
                     } else {
@@ -231,8 +239,7 @@ class BBuddyApi
         $this->_addRoute(
             new ApiRoute(
                 "/system/barcodes",
-                function ()
-                {
+                function () {
                     global $BBCONFIG;
                     return self::createResultArray(
                         array(
@@ -253,8 +260,7 @@ class BBuddyApi
         $this->_addRoute(
             new ApiRoute(
                 "/system/info",
-                function ()
-                {
+                function () {
                     return self::createResultArray(
                         array(
                             "version"    => BB_VERSION_READABLE,
@@ -266,6 +272,11 @@ class BBuddyApi
         );
     }
     
+    /**
+     * Return API function results to the client
+     *
+     * @returns void
+     */
     static function sendResult($data, $result)
     {
         header('Content-Type: application/json');
@@ -285,8 +296,11 @@ class ApiRoute
     
     /**
      * Create a new route
-     * @param string path URL Path to invoke this route
-     * @param function function Function to execute when this route is called
+     *
+     * @param string $path URL Path to invoke this route
+     * @param function $function Function to execute when this route is called
+     *
+     * @return void
      */
     function __construct($path, $function)
     {
@@ -296,6 +310,8 @@ class ApiRoute
     
     /**
      * Run the API Function
+     *
+     * @return void
      */
     function execute()
     {
