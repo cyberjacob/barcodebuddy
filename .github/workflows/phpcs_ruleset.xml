@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="Barcode Buddy Standard">
+  <!-- Include everything by default -->
+  <file>.</file>
+  
+  <!-- Exclude dependencies -->
+  <exclude-pattern type="relative">^/incl/authentication/composer/vendor/*</exclude>
+  <exclude-pattern type="relative">^/incl/websocket/php-websocket/*</exclude>
+  <exclude-pattern type="relative">^/incl/websocket/php-websocket-1.0/*</exclude>
+  
+  <!-- Enable output colours -->
+  <arg name="colors"/>
+  
+  <!-- Inherit the default standard -->
+  <rule ref="PEAR">
+    <!-- Disable some rules for file header tags that are not in use -->
+    <exclude name="PEAR.Commenting.FileComment.MissingCategoryTag" />
+    <exclude name="PEAR.Commenting.FileComment.MissingPackageTag" />
+    <exclude name="PEAR.Commenting.FileComment.MissingLinkTag" />
+    
+    <!-- No not require author headers to include their email address -->
+    <exclude name="PEAR.Commenting.FileComment.InvalidAuthors" />
+  </rule>
+  
+  <!-- Override the maximum line length to a sensible modern value
+  <rule ref="Generic.Files.LineLength">
+    <properties>
+      <property name="lineLimit" value="90"/>
+      <property name="absoluteLineLimit" value="100"/>
+    </properties>
+  </rule>
+
+</ruleset>
