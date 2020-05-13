@@ -37,6 +37,8 @@ const METHOD_POST        = "POST";
 const LOGIN_URL         = "loginurl";
 const LOGIN_API_KEY     = "loginkey";
 
+const DISPLAY_DEBUG     = false;
+
 class InvalidServerResponseException extends Exception { }
 class UnauthorizedException          extends Exception { }
 class InvalidJsonResponseException   extends Exception { }
@@ -45,6 +47,7 @@ class InvalidSSLException            extends Exception { }
 class CurlGenerator {
     private $ch = null;
     private $method = METHOD_GET;
+    private $urlApi;
 
     const IGNORED_API_ERRORS_REGEX = array(
         '/No product with barcode .+ found/'
@@ -53,8 +56,9 @@ class CurlGenerator {
     function __construct($url, $method = METHOD_GET, $jasonData = null, $loginOverride = null, $noApiCall = false) {
         global $CONFIG;
         
-        $this->method = $method;
-        $this->ch     = curl_init();
+        $this->method  = $method;
+        $this->urlApi  = $url;
+        $this->ch      = curl_init();
 
         if ($loginOverride == null) {
             require_once __DIR__ . "/db.inc.php";
@@ -94,6 +98,11 @@ class CurlGenerator {
     }
     
     function execute($decode = false) {
+        if (DISPLAY_DEBUG) {
+            global $db;
+            $startTime = microtime(true);
+            $db->saveLog("<i>Executing API call: " . $this->urlApi. "</i>", false, false, true);
+        }
         $curlResult   = curl_exec($this->ch);
         $this->checkForErrorsAndThrow($curlResult);
         curl_close($this->ch);
@@ -110,6 +119,10 @@ class CurlGenerator {
             }
             if (!$isIgnoredError)
                 throw new InvalidJsonResponseException($jsonDecoded["error_message"]);
+        }
+        if (DISPLAY_DEBUG) {
+            $totalTimeMs = round((microtime(true)- $startTime) * 1000);
+            $db->saveLog("<i>Executing took " . $totalTimeMs . "ms</i>", false, false, true);
         }
         if ($decode)
             return $jsonDecoded;
@@ -299,7 +312,7 @@ class API {
      * @param  String price of product Default: null
      * @return false if default best before date not set
      */
-    public static function purchaseProduct($id, $amount, $bestbefore = null, $price = null) {
+    public static function purchaseProduct($id, $amount, $bestbefore = null, $price = null, &$fileLock = null, $defaultBestBefore = null) {
         require_once __DIR__ . "/db.inc.php";
         global $BBCONFIG;
         
@@ -316,7 +329,10 @@ class API {
             $daysBestBefore           = $bestbefore;
             $data['best_before_date'] = self::formatBestBeforeDays($bestbefore);
         } else {
-            $daysBestBefore           = self::getDefaultBestBeforeDays($id);
+            if ($defaultBestBefore != null)
+                $daysBestBefore       = $defaultBestBefore;
+            else
+                $daysBestBefore       = self::getDefaultBestBeforeDays($id);
             $data['best_before_date'] = self::formatBestBeforeDays($daysBestBefore);
         }
         $data_json = json_encode($data);
@@ -328,7 +344,8 @@ class API {
         } catch (Exception $e) {
             self::processError($e, "Could not add product to inventory");
         }
-
+        if ($fileLock != null)
+            $fileLock->removeLock();
         if ($BBCONFIG["SHOPPINGLIST_REMOVE"]) {
             self::removeFromShoppinglist($id, $amount);
         }
@@ -538,14 +555,15 @@ class API {
         
         if (isset($result["product"]["id"])) {
             checkIfNumeric($result["product"]["id"]);
-            $resultArray                = array();
-            $resultArray["id"]          = $result["product"]["id"];
-            $resultArray["name"]        = sanitizeString($result["product"]["name"]);
-            $resultArray["unit"]        = sanitizeString($result["quantity_unit_stock"]["name"]);
-            $resultArray["stockAmount"] = sanitizeString($result["stock_amount"]);
-            $resultArray["tareWeight"]  = sanitizeString($result["product"]["tare_weight"]);
-            $resultArray["isTare"]      = ($result["product"]["enable_tare_weight_handling"] == 1);
-            $resultArray["quFactor"]    = sanitizeString($result["product"]["qu_factor_purchase_to_stock"]);
+            $resultArray                      = array();
+            $resultArray["id"]                = $result["product"]["id"];
+            $resultArray["name"]              = sanitizeString($result["product"]["name"]);
+            $resultArray["unit"]              = sanitizeString($result["quantity_unit_stock"]["name"]);
+            $resultArray["stockAmount"]       = sanitizeString($result["stock_amount"]);
+            $resultArray["tareWeight"]        = sanitizeString($result["product"]["tare_weight"]);
+            $resultArray["isTare"]            = ($result["product"]["enable_tare_weight_handling"] == 1);
+            $resultArray["quFactor"]          = sanitizeString($result["product"]["qu_factor_purchase_to_stock"]);
+            $resultArray["defaultBestBefore"] = sanitizeString($result["product"]["default_best_before_days"]);
             if ($resultArray["stockAmount"] == null) {
                 $resultArray["stockAmount"] = "0";
             }
