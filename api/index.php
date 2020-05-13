@@ -127,11 +127,11 @@ class BBuddyApi
     /**
      * Create object for storing API call results
      *
-     * @return array
+     * @param mixed  $data     API Result
+     * @param string $result   Success/Fail Description
+     * @param int    $http_int Result Code intended to be returned
      *
-     * @param mixed $data API Result
-     * @param string $result Success/Fail Description
-     * @param int $http_int Result Code intended to be returned
+     * @return array
      */
     static function createResultArray($data = null, $result = "OK", $http_int = 200)
     {
@@ -162,41 +162,42 @@ class BBuddyApi
     private function _initRoutes()
     {    
         $this->_addRoute(
-            new ApiRoute("/action/scan",
-                         function () {
-                             $barcode = "";
-                             if (isset($_GET["text"])) {
-                                 $barcode = $_GET["text"];
-                             }
-                             if (isset($_GET["add"])) {
-                                 $barcode = $_GET["add"];
-                             }
-                             if (isset($_POST["barcode"])) {
-                                 $barcode = $_POST["barcode"];
-                             }
-                             if ($barcode == "") {
-                                 return self::createResultArray(null, "No barcode supplied", 400);
-                             } else {
-                                 $bestBefore = null;
-                                 $price = null;
-                                 if (isset($_POST["bestBeforeInDays"]) && $_POST["bestBeforeInDays"] != null) {
-                                     if (is_numeric($_POST["bestBeforeInDays"])) {
-                                         $bestBefore = $_POST["bestBeforeInDays"];
-                                     } else {
-                                         return self::createResultArray(null, "Invalid parameter bestBeforeInDays: needs to be type int", 400);
-                                     }
-                                 }
-                                 if (isset($_POST["price"]) && $_POST["price"] != null) {
-                                     if (is_numeric($_POST["price"])) {
-                                         $price = $_POST["price"];
-                                     } else {
-                                         return self::createResultArray(null, "Invalid parameter price: needs to be type float", 400);
-                                     }
-                                 }
-                                 $result = processNewBarcode(sanitizeString($barcode), true, $bestBefore, $price);
-                                 return self::createResultArray(array("result" => sanitizeString($result)));
-                             }
-                         }
+            new ApiRoute(
+                "/action/scan",
+                function () {
+                    $barcode = "";
+                    if (isset($_GET["text"])) {
+                        $barcode = $_GET["text"];
+                    }
+                    if (isset($_GET["add"])) {
+                        $barcode = $_GET["add"];
+                    }
+                    if (isset($_POST["barcode"])) {
+                        $barcode = $_POST["barcode"];
+                    }
+                    if ($barcode == "") {
+                        return self::createResultArray(null, "No barcode supplied", 400);
+                    } else {
+                        $bestBefore = null;
+                        $price = null;
+                        if (isset($_POST["bestBeforeInDays"]) && $_POST["bestBeforeInDays"] != null) {
+                            if (is_numeric($_POST["bestBeforeInDays"])) {
+                                $bestBefore = $_POST["bestBeforeInDays"];
+                            } else {
+                                return self::createResultArray(null, "Invalid parameter bestBeforeInDays: needs to be type int", 400);
+                            }
+                        }
+                        if (isset($_POST["price"]) && $_POST["price"] != null) {
+                            if (is_numeric($_POST["price"])) {
+                                $price = $_POST["price"];
+                            } else {
+                                return self::createResultArray(null, "Invalid parameter price: needs to be type float", 400);
+                            }
+                        }
+                        $result = processNewBarcode(sanitizeString($barcode), true, $bestBefore, $price);
+                        return self::createResultArray(array("result" => sanitizeString($result)));
+                    }
+                }
             )
         );
         
@@ -222,10 +223,10 @@ class BBuddyApi
                     //Also check if value is a valid range:
                     //    STATE_CONSUME the lowest and
                     //    STATE_CONSUME_ALL the highest value
-                    if (   !isset($_POST["state"])
-                        || !is_numeric($_POST["state"])
-                        || $_POST["state"] < STATE_CONSUME
-                        || $_POST["state"] > STATE_CONSUME_ALL
+                    if (!isset($_POST["state"])
+                     || !is_numeric($_POST["state"])
+                     || $_POST["state"] < STATE_CONSUME
+                     || $_POST["state"] > STATE_CONSUME_ALL
                     ) {
                         return self::createResultArray(null, "Invalid state provided", 400);
                     } else {
@@ -275,6 +276,8 @@ class BBuddyApi
     /**
      * Return API function results to the client
      *
+     * @param array $data   Result to be sent to the client
+     * @param int   $result HTTP Response code to be sent to the client
      * @returns void
      */
     static function sendResult($data, $result)
@@ -297,7 +300,7 @@ class ApiRoute
     /**
      * Create a new route
      *
-     * @param string $path URL Path to invoke this route
+     * @param string   $path     URL Path to invoke this route
      * @param function $function Function to execute when this route is called
      *
      * @return void
