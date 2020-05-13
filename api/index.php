@@ -147,6 +147,8 @@ class BBuddyApi
     /**
      * Helper function for creating new API routes
      *
+     * @param string $route URL of route
+     *
      * @return void
      */
     private function _addRoute($route)
