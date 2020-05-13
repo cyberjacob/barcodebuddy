@@ -10,10 +10,10 @@
  * 
  * Helper file for Grocy API and barcode lookup
  *
- * @author     Marc Ole Bulling
- * @copyright  2019 Marc Ole Bulling
- * @license    https://www.gnu.org/licenses/gpl-3.0.en.html  GNU GPL v3.0
- * @since      File available since Release 1.0
+ * @author    Marc Ole Bulling
+ * @copyright 2019 Marc Ole Bulling
+ * @license   https://www.gnu.org/licenses/gpl-3.0.en.html  GNU GPL v3.0
+ * @since     File available since Release 1.0
  */
 
 
@@ -39,26 +39,61 @@ const LOGIN_API_KEY     = "loginkey";
 
 const DISPLAY_DEBUG     = false;
 
-class InvalidServerResponseException extends Exception { }
-class UnauthorizedException          extends Exception { }
-class InvalidJsonResponseException   extends Exception { }
-class InvalidSSLException            extends Exception { }
+/**
+ * Marker class for invalid server responses
+ */
+class InvalidServerResponseException extends Exception
+{
+}
 
-class CurlGenerator {
-    private $ch = null;
-    private $method = METHOD_GET;
-    private $urlApi;
+/**
+ * Marker class for unautharised API requests
+ */
+class UnauthorizedException          extends Exception
+{
+}
+
+/**
+ * Marker class for invalid JSON responses
+ */
+class InvalidJsonResponseException   extends Exception
+{
+}
+
+/**
+ * Marker class for SSL Errors
+ */
+class InvalidSSLException            extends Exception
+{
+}
+
+/**
+ * CURL request generator for calls to Grocy
+ */
+class CurlGenerator
+{
+    private $_ch = null;
+    private $_method = METHOD_GET;
+    private $_urlApi;
 
     const IGNORED_API_ERRORS_REGEX = array(
         '/No product with barcode .+ found/'
     );
     
+    /**
+     * Create a new CURL request
+     *
+     * @param string $url URL to call
+     * @param method $method HTTP Request Method
+     * @param string Request Body Data to be sent as JSON
+     * 
+     */
     function __construct($url, $method = METHOD_GET, $jasonData = null, $loginOverride = null, $noApiCall = false) {
         global $CONFIG;
         
-        $this->method  = $method;
-        $this->urlApi  = $url;
-        $this->ch      = curl_init();
+        $this->_method  = $method;
+        $this->_urlApi  = $url;
+        $this->_ch      = curl_init();
 
         if ($loginOverride == null) {
             require_once __DIR__ . "/db.inc.php";
@@ -76,36 +111,39 @@ class CurlGenerator {
         if ($jasonData != null) {
             array_push($headerArray, 'Content-Type: application/json');
             array_push($headerArray, 'Content-Length: ' . strlen($jasonData));
-            curl_setopt($this->ch, CURLOPT_POSTFIELDS, $jasonData);
+            curl_setopt($this->_ch, CURLOPT_POSTFIELDS, $jasonData);
         }
         
         if ($noApiCall)
-            curl_setopt($this->ch, CURLOPT_URL, $url);
+            curl_setopt($this->_ch, CURLOPT_URL, $url);
         else
-            curl_setopt($this->ch, CURLOPT_URL, $apiUrl . $url);
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headerArray);
-        curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, $this->method);
-        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 0);
-        curl_setopt($this->ch, CURLOPT_USERAGENT,'BarcodeBuddy v' . BB_VERSION_READABLE);
-        curl_setopt($this->ch, CURLOPT_TIMEOUT, $CONFIG->CURL_TIMEOUT_S);
+            curl_setopt($this->_ch, CURLOPT_URL, $apiUrl . $url);
+        curl_setopt($this->_ch, CURLOPT_HTTPHEADER, $headerArray);
+        curl_setopt($this->_ch, CURLOPT_CUSTOMREQUEST, $this->_method);
+        curl_setopt($this->_ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->_ch, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($this->_ch, CURLOPT_USERAGENT,'BarcodeBuddy v' . BB_VERSION_READABLE);
+        curl_setopt($this->_ch, CURLOPT_TIMEOUT, $CONFIG->CURL_TIMEOUT_S);
         if ($CONFIG->CURL_ALLOW_INSECURE_SSL_CA) {
-            curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($this->_ch, CURLOPT_SSL_VERIFYPEER, false);
         }
         if ($CONFIG->CURL_ALLOW_INSECURE_SSL_HOST) {
-            curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($this->_ch, CURLOPT_SSL_VERIFYHOST, false);
         }
     }
     
+    /**
+     * Execute the request and return the results
+     */
     function execute($decode = false) {
         if (DISPLAY_DEBUG) {
             global $db;
             $startTime = microtime(true);
             $db->saveLog("<i>Executing API call: " . $this->urlApi. "</i>", false, false, true);
         }
-        $curlResult   = curl_exec($this->ch);
+        $curlResult   = curl_exec($this->_ch);
         $this->checkForErrorsAndThrow($curlResult);
-        curl_close($this->ch);
+        curl_close($this->_ch);
 
         $jsonDecoded = json_decode($curlResult, true);
         if ($decode && isset($jsonDecoded->response->status) && $jsonDecoded->response->status == 'ERROR') 
@@ -131,8 +169,8 @@ class CurlGenerator {
     }
 
     private function checkForErrorsAndThrow($curlResult) {
-        $curlError    = curl_errno($this->ch);
-        $responseCode = curl_getinfo($this->ch, CURLINFO_RESPONSE_CODE);
+        $curlError    = curl_errno($this->_ch);
+        $responseCode = curl_getinfo($this->_ch, CURLINFO_RESPONSE_CODE);
 
         if ($responseCode == 401)
             throw new UnauthorizedException();
@@ -151,8 +189,10 @@ class CurlGenerator {
     }
 }
 
+/**
+ * API Class
+ */
 class API {
-    
     /**
      * Getting info about one or all Grocy products.
      * 
@@ -664,8 +704,5 @@ class API {
         global $db;
         if ($db != null)
             $db->saveError($errorMessage, $isFatal);
-    }
-    
+    }   
 }
-
-?>
