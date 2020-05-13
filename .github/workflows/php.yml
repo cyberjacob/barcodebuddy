@@ -11,6 +11,8 @@ jobs:
 #      with:
 #        args: . --report=json --standard=.github/workflows/phpcs_ruleset.xml
     - uses: MilesChou/php-tools-action/phpmetrics@master
+      with:
+        args: . --exclude=incl/authentication/composer/vendor,incl/websocket/php-websocket,incl/websocket/php-websocket-1.0,incl/sse/websocket_client.php
     - uses: MilesChou/php-tools-action/phpstan@master
       with:
         args: --level=0
