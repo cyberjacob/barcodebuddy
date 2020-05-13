@@ -25,8 +25,8 @@
   <!-- Override the maximum line length to a sensible modern value -->
   <rule ref="Generic.Files.LineLength">
     <properties>
-      <property name="lineLimit" value="90"/>
-      <property name="absoluteLineLimit" value="100"/>
+      <property name="lineLimit" value="120"/>
+      <property name="absoluteLineLimit" value="130"/>
     </properties>
   </rule>
 
