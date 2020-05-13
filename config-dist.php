@@ -58,7 +58,8 @@ const HIDE_LINK_SCREEN             = false;
 //Set your base grocy URL here if it differs from the API URL (eg. because of different network / DNS)
 const EXTERNAL_GROCY_URL           = null;
 
-//List of IPs and subnets that can bypass authentication. If using with a reverse proxy, ensure TRUSTED_PROXIES is set correctly.
+//List of IPs and subnets that can bypass authentication.
+//If using with a reverse proxy, ensure TRUSTED_PROXIES is set correctly.
 const AUTHENTICATION_BYPASS_NETS   = array(
                                          // "192.168.0.1",
                                          // "127.0.0.1"
