@@ -186,18 +186,22 @@ class BBuddyApi
                             if (is_numeric($_POST["bestBeforeInDays"])) {
                                 $bestBefore = $_POST["bestBeforeInDays"];
                             } else {
-                                return self::createResultArray(null,
-                                                               "Invalid parameter bestBeforeInDays: needs to be type int",
-                                                               400);
+                                return self::createResultArray(
+                                    null,
+                                    "Invalid parameter bestBeforeInDays: needs to be type int",
+                                    400
+                                );
                             }
                         }
                         if (isset($_POST["price"]) && $_POST["price"] != null) {
                             if (is_numeric($_POST["price"])) {
                                 $price = $_POST["price"];
                             } else {
-                                return self::createResultArray(null,
-                                                               "Invalid parameter price: needs to be type float",
-                                                               400);
+                                return self::createResultArray(
+                                    null,
+                                    "Invalid parameter price: needs to be type float",
+                                    400
+                                );
                             }
                         }
                         $result = processNewBarcode(sanitizeString($barcode), true, $bestBefore, $price);
@@ -230,9 +234,9 @@ class BBuddyApi
                     //    STATE_CONSUME the lowest and
                     //    STATE_CONSUME_ALL the highest value
                     if (!isset($_POST["state"])
-                       || !is_numeric($_POST["state"])
-                       || $_POST["state"] < STATE_CONSUME
-                       || $_POST["state"] > STATE_CONSUME_ALL
+                        || !is_numeric($_POST["state"])
+                        || $_POST["state"] < STATE_CONSUME
+                        || $_POST["state"] > STATE_CONSUME_ALL
                     ) {
                         return self::createResultArray(null, "Invalid state provided", 400);
                     } else {
@@ -282,8 +286,8 @@ class BBuddyApi
     /**
      * Return API function results to the client
      *
-     * @param  array $data   Result to be sent to the client
-     * @param  int   $result HTTP Response code to be sent to the client
+     * @param array $data   Result to be sent to the client
+     * @param int   $result HTTP Response code to be sent to the client
      * 
      * @return void
      */
