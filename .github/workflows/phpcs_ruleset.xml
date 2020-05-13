@@ -22,7 +22,7 @@
     <exclude name="PEAR.Commenting.FileComment.InvalidAuthors" />
   </rule>
   
-  <!-- Override the maximum line length to a sensible modern value
+  <!-- Override the maximum line length to a sensible modern value -->
   <rule ref="Generic.Files.LineLength">
     <properties>
       <property name="lineLimit" value="90"/>
