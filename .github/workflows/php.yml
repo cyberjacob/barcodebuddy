@@ -26,5 +26,5 @@ jobs:
     - run: composer require phpstan/phpstan
       name: Install PHPStan
       
-    - run: vendor/bin/phpstan analyse --configuration=.github/workflows/phpstan.neon --debug #| vendor/bin/cs2pr
+    - run: vendor/bin/phpstan analyse --configuration=./.github/workflows/phpstan.neon --debug #| vendor/bin/cs2pr
       name: PHPStan
