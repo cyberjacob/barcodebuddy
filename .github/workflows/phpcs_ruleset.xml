@@ -7,6 +7,7 @@
   <exclude-pattern>incl/authentication/composer/vendor</exclude-pattern>
   <exclude-pattern>incl/websocket/php-websocket</exclude-pattern>
   <exclude-pattern>incl/websocket/php-websocket-1.0</exclude-pattern>
+  <exclude-pattern>incl/sse/websocket_client.php</exclude-pattern>
   
   <!-- Enable output colours -->
   <arg name="colors"/>
