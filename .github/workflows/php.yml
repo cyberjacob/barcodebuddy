@@ -9,7 +9,7 @@ jobs:
     - name: phpcs
       uses: MilesChou/php-tools-action/phpcs@master
       with:
-        args: .
+        args: . --report=json
     - uses: MilesChou/php-tools-action/phpmd@master
     - uses: MilesChou/php-tools-action/phpmetrics@master
     - uses: MilesChou/php-tools-action/phpstan@master
