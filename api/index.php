@@ -49,6 +49,7 @@ class BBuddyApi
      * Check if API call has the correct authorization.
      * Either from a user authentication, disabled authentication (either globally or for a specific subnet),
      * or from an API key.
+     * @return true | false
      */
     function checkIfAuthorized()
     {
@@ -80,6 +81,7 @@ class BBuddyApi
     
     /**
      * Return an unauthorized result and stop.
+     * @return void
      */
     static function sendUnauthorizedAndDie()
     {
@@ -89,6 +91,8 @@ class BBuddyApi
     
     /**
      * Complete an API request
+     * @return void
+     * @param string url URL path to execute
      */
     function execute($url)
     {
@@ -108,6 +112,7 @@ class BBuddyApi
     
     /**
      * Create a new API instance
+     * @return void
      */
     function __construct()
     {
@@ -116,6 +121,10 @@ class BBuddyApi
     
     /**
      * Create object for storing API call results
+     * @return array
+     * @param mixed data API Result
+     * @param string result Success/Fail Description
+     * @param int http_int Result Code intended to be returned
      */
     static function createResultArray($data = null, $result = "OK", $http_int = 200)
     {
@@ -128,8 +137,9 @@ class BBuddyApi
         );
     }
     
-    /*
+    /**
      * Helper function for creating new API routes
+     * @return void
      */
     private function _addRoute($route)
     {
@@ -138,13 +148,13 @@ class BBuddyApi
     
     /**
      * Create all standard routes
+     * @return void
      */
     private function _initRoutes()
     {    
         $this->_addRoute(
             new ApiRoute("/action/scan",
-                         function()
-                         {
+                         function () {
                              $barcode = "";
                              if (isset($_GET["text"])) {
                                  $barcode = $_GET["text"];
@@ -177,47 +187,83 @@ class BBuddyApi
                                  $result = processNewBarcode(sanitizeString($barcode), true, $bestBefore, $price);
                                  return self::createResultArray(array("result" => sanitizeString($result)));
                              }
-                         })
+                         }
+            )
         );
         
-        $this->_addRoute(new ApiRoute("/state/getmode", function() {
-            global $db;
-            return self::createResultArray(array(
-                "mode" => $db->getTransactionState()
-            ));
-        }));
+        $this->_addRoute(
+            new ApiRoute(
+                "/state/getmode",
+                function ()
+                {
+                    global $db;
+                    return self::createResultArray(
+                        array(
+                            "mode" => $db->getTransactionState()
+                        )
+                    );
+                }
+            )
+        );
         
-        $this->_addRoute(new ApiRoute("/state/setmode", function() {
-            global $db;
-            //Also check if value is a valid range (STATE_CONSUME the lowest and STATE_CONSUME_ALL the highest value)
-            if (!isset($_POST["state"]) || !is_numeric($_POST["state"]) || $_POST["state"] < STATE_CONSUME || $_POST["state"] > STATE_CONSUME_ALL) {
-                return self::createResultArray(null, "Invalid state provided", 400);
-            } else {
-                $db->setTransactionState(intval($_POST["state"]));
-                return self::createResultArray();
-            }
-        }));
+        $this->_addRoute(
+            new ApiRoute(
+                "/state/setmode",
+                function ()
+                {
+                    global $db;
+                    //Also check if value is a valid range (STATE_CONSUME the lowest and STATE_CONSUME_ALL the highest value)
+                    if (
+                        !isset($_POST["state"]) ||
+                        !is_numeric($_POST["state"]) ||
+                        $_POST["state"] < STATE_CONSUME ||
+                        $_POST["state"] > STATE_CONSUME_ALL
+                    ) {
+                        return self::createResultArray(null, "Invalid state provided", 400);
+                    } else {
+                        $db->setTransactionState(intval($_POST["state"]));
+                        return self::createResultArray();
+                    }
+                }
+            )
+        );
         
-        $this->_addRoute(new ApiRoute("/system/barcodes", function() {
-            global $BBCONFIG;
-            return self::createResultArray(array(
-                "BARCODE_C" => $BBCONFIG["BARCODE_C"],
-                "BARCODE_CS" => $BBCONFIG["BARCODE_CS"],
-                "BARCODE_P" => $BBCONFIG["BARCODE_P"],
-                "BARCODE_O" => $BBCONFIG["BARCODE_O"],
-                "BARCODE_GS" => $BBCONFIG["BARCODE_GS"],
-                "BARCODE_Q" => $BBCONFIG["BARCODE_Q"],
-                "BARCODE_AS" => $BBCONFIG["BARCODE_AS"],
-                "BARCODE_CA" => $BBCONFIG["BARCODE_CA"]
-            ));
-        }));
+        $this->_addRoute(
+            new ApiRoute(
+                "/system/barcodes",
+                function ()
+                {
+                    global $BBCONFIG;
+                    return self::createResultArray(
+                        array(
+                            "BARCODE_C"  => $BBCONFIG["BARCODE_C"],
+                            "BARCODE_CS" => $BBCONFIG["BARCODE_CS"],
+                            "BARCODE_P"  => $BBCONFIG["BARCODE_P"],
+                            "BARCODE_O"  => $BBCONFIG["BARCODE_O"],
+                            "BARCODE_GS" => $BBCONFIG["BARCODE_GS"],
+                            "BARCODE_Q"  => $BBCONFIG["BARCODE_Q"],
+                            "BARCODE_AS" => $BBCONFIG["BARCODE_AS"],
+                            "BARCODE_CA" => $BBCONFIG["BARCODE_CA"]
+                        )
+                    );
+                }
+            )
+        );
         
-        $this->_addRoute(new ApiRoute("/system/info", function() {
-            return self::createResultArray(array(
-                "version"    => BB_VERSION_READABLE,
-                "version_int" => BB_VERSION
-            ));
-        }));
+        $this->_addRoute(
+            new ApiRoute(
+                "/system/info",
+                function ()
+                {
+                    return self::createResultArray(
+                        array(
+                            "version"    => BB_VERSION_READABLE,
+                            "version_int" => BB_VERSION
+                        )
+                    );
+                }
+            )
+        );
     }
     
     static function sendResult($data, $result)
@@ -229,21 +275,31 @@ class BBuddyApi
     }
 }
 
-
+/**
+ * API Routing information
+ */
 class ApiRoute
 {
     public $path;
-    private $function;
+    private $_function;
     
+    /**
+     * Create a new route
+     * @param string path URL Path to invoke this route
+     * @param function function Function to execute when this route is called
+     */
     function __construct($path, $function)
     {
         $this->path     = '/api' . $path;
-        $this->function = $function;
+        $this->_function = $function;
     }
     
+    /**
+     * Run the API Function
+     */
     function execute()
     {
-        $result = $this->function->__invoke();
+        $result = $this->_function->__invoke();
         BBuddyApi::sendResult($result, $result["result"]["http_code"]);
     }
 }
